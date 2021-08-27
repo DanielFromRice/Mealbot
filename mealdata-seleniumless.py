@@ -104,8 +104,3 @@ class MealDataScraper():
             print("ERROR: Attempting to obtain food info without starting the parser")
             return []
         return self.processed_information
-
-
-mds = MealDataScraper()
-mds.start()
-print(mds.get_food_information())
