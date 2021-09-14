@@ -1,14 +1,27 @@
+from json import JSONEncoder
 
-class MealTimeInfo():
+class ServeryDiningInfo(JSONEncoder):
+    """
+    Top level object holding structured information regarding information scraped from the servery
+    """
+    def __init__(self, servery):
+        self.servery = servery
+        self.meals = []
+
+class MealTimeInfo(JSONEncoder):
     def __init__(self):
         self.daily_food_data = []
         self.time_of_day = None
-        self.servery_name = None
 
     def __str__(self):
-        return "Meal information for {0}".format(self.time_of_day)
+        header = "Meal information for {0}".format(self.time_of_day)
+        details = ""
 
-class DailyFoodInfo():
+        for food_data in self.daily_food_data:
+            details += str(food_data)
+        return header + "\n" + details
+
+class DailyFoodInfo(JSONEncoder):
     def __init__(self):
         self.day = None
         self.food_items = []
@@ -19,7 +32,7 @@ class DailyFoodInfo():
             result += "\n"
         return result
 
-class FoodItemInfo():
+class FoodItemInfo(JSONEncoder):
     def __init__(self, name):
         self.name = name
     def __str__(self):
